@@ -5,7 +5,7 @@ import './App.css'
 import Header from './components/Header'
 import Completed from './pages/Completed'
 import Current from './pages/Current'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { GetTaskAPI } from './services/allApi'
 import { Slide, toast, ToastContainer } from 'react-toastify'
 
@@ -32,6 +32,7 @@ function App() {
     <>
       <Header refresh={getTasksData} />
       <Routes>
+        <Route path="/" element={<Navigate to="/current" />} />
         <Route path='/current' element={<Current tasksData={tasksData} refresh={getTasksData} />} />
         <Route path='/completed' element={<Completed />} />
       </Routes>
