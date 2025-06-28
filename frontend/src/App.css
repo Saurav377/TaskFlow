@@ -1,0 +1,3 @@
+.Toastify__toast-container {
+  z-index: 2000;/* or any value higher than Bootstrap modal (1050) */
+}
