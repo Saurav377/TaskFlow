@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { deleteCompletedAPI, GetCompletedAPI } from '../services/allApi';
+import {deleteTasksAPI, GetCompletedAPI } from '../services/allApi';
 import Card from 'react-bootstrap/Card';
 import { Slide, toast } from 'react-toastify';
 import Button from 'react-bootstrap/esm/Button';
@@ -24,7 +24,7 @@ function Completed() {
 
   const handleDelete = async (id) => {
     try {
-      const result = await deleteCompletedAPI(id);
+      const result = await deleteTasksAPI(id);
       console.log("Delete response:", result);
       if (result.status == 200) {
         toast.error('Deleted!', {

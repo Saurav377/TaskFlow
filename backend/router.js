@@ -15,6 +15,4 @@ router.post('/complete-task/:id', completeTask)
 
 router.get('/get-completed',getCompleted)
 
-router.delete('/delete-completed/:id', deleteCompleted)
-
 module.exports = router

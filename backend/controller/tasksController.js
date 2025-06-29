@@ -1,4 +1,4 @@
-const { tasks, completed } = require('../model/tasksModel');
+const tasks = require('../model/tasksModel');
 
 
 exports.AddTask = async(req,res)=>{
@@ -18,14 +18,16 @@ exports.AddTask = async(req,res)=>{
     }
 }
 
-exports.getTasks = async(req,res) =>{
-    try{
-        const allTasks = await tasks.find()
-        res.status(200).json(allTasks)
-    }catch(err){
-        res.status(401).json(err)
-    }
-}
+exports.getTasks = async (req, res) => {
+  try {
+    const allTasks = await tasks.find({ completed: false });
+    res.status(200).json(allTasks);
+  } catch (err) {
+    console.error("Error fetching tasks:", err);
+    res.status(500).json({ error: "Server error", details: err });
+  }
+};
+
 
 exports.deleteTasks = async(req,res)=>{
     const {id} = req.params
@@ -51,37 +53,31 @@ exports.updateTask = async(req,res) =>{
     }
 }
 
-exports.completeTask = async(req,res) =>{
-    const {id} = req.params
-    try{
-        const currentTask = await tasks.findById({_id:id})
-        const completedTask = new completed({
-            taskName: currentTask.taskName,
-            taskDescription: currentTask.taskDescription
-        })
-        await tasks.findByIdAndDelete({_id:id})
-        await completedTask.save()
-        res.status(200).json('Task deleted successfully')
-    }catch(err){
-        res.status(401).json(err)
+exports.completeTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedTask = await tasks.findByIdAndUpdate(
+      id,
+      { completed: true },
+      { new: true }
+    );
+    if (!updatedTask) {
+      return res.status(404).json({ message: "Task not found" });
     }
-}
+    res.status(200).json({ message: "Task marked as completed", task: updatedTask });
+  } catch (err) {
+    console.error("Error completing task:", err);
+    res.status(500).json({ error: "Something went wrong", details: err });
+  }
+};
 
-exports.getCompleted = async(req,res) =>{
-    try{
-        const allTasks = await completed.find()
-        res.status(200).json(allTasks)
-    }catch(err){
-        res.status(401).json(err)
-    }
-}
 
-exports.deleteCompleted = async(req,res)=>{
-    const {id} = req.params
-    try{
-        await completed.findByIdAndDelete({_id:id})
-        res.status(200).json('Task deleted successfully')
-    }catch(err){
-        res.status(401).json(err)
-    }
-}
+exports.getCompleted = async (req, res) => {
+  try {
+    const completedTasks = await tasks.find({ completed: true });
+    res.status(200).json(completedTasks);
+  } catch (err) {
+    console.error("Error fetching completed tasks:", err);
+    res.status(500).json({ error: "Server error", details: err });
+  }
+};

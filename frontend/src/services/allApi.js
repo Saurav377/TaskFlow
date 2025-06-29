@@ -5,8 +5,8 @@ export const AddTaskAPI = async(reqBody)=>{
     return await commonApi("POST",`${serverURL}/add-task`,reqBody,"")
 }
 
-export const GetTaskAPI = async(reqBody)=>{
-    return await commonApi("GET", `${serverURL}/get-tasks`,reqBody,"")
+export const GetTaskAPI = async () => {
+  return await commonApi("GET", `${serverURL}/get-tasks`, {}, "");
 }
 
 export const deleteTasksAPI = async(id,reqHeader) =>{
@@ -21,10 +21,6 @@ export const completeTaskAPI = async (id, reqHeader) => {
     return await commonApi("POST", `${serverURL}/complete-task/${id}`, {}, reqHeader)
 }
 
-export const GetCompletedAPI = async(reqBody)=>{
-    return await commonApi("GET", `${serverURL}/get-completed`,reqBody,"")
-}
-
-export const deleteCompletedAPI = async(id,reqHeader) =>{
-    return await commonApi("DELETE",`${serverURL}/delete-completed/${id}`,{},reqHeader)
+export const GetCompletedAPI = async () => {
+  return await commonApi("GET", `${serverURL}/get-completed`, {}, "");
 }
