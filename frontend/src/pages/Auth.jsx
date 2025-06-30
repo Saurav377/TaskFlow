@@ -135,8 +135,8 @@ function Auth({ register, refresh }) {
                 </nav>
             </div>
             <div className="row">
-                <div className="col-1 col-md-4"></div>
-                <div className="col-10 col-md-4 mt-5">
+                <div className="col-2 col-md-4"></div>
+                <div className="col-8 col-md-4 mt-5">
                     {!register ?
                         <h1 className='m-3'>Login</h1> :
                         <h1 className='m-3'>Register</h1>}
@@ -161,7 +161,7 @@ function Auth({ register, refresh }) {
                                 <p className='m-3'>Already have an account? Click here to <Link to={'/login'}>Login</Link></p></>}
                     </div>
                 </div>
-                <div className="col-1 col-md-4"></div>
+                <div className="col-2 col-md-4"></div>
             </div>
         </div>
     )
