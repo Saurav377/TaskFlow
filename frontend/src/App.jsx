@@ -39,7 +39,7 @@ function App() {
         <Route
           path="/"
           element={
-            sessionStorage.getItem('existingUser') ? <Navigate to="/current" /> : <Navigate to="/login" />
+            localStorage.getItem('existingUser') ? <Navigate to="/current" /> : <Navigate to="/login" />
           }
         />
         <Route path="/login" element={<Auth register={false} refresh={getTasksData} />} />

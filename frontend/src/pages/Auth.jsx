@@ -99,8 +99,8 @@ function Auth({ register, refresh }) {
                     transition: Slide,
                 });
 
-                sessionStorage.setItem('existingUser', JSON.stringify(result.data.existingUser))
-                sessionStorage.setItem("token", result.data.token)
+                localStorage.setItem('existingUser', JSON.stringify(result.data.existingUser))
+                localStorage.setItem("token", result.data.token)
                 refresh();
 
                 setUserDetails({

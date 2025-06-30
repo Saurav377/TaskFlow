@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 function PrivateRoute({ children }) {
-  const user = sessionStorage.getItem('existingUser');
+  const user = localStorage.getItem('existingUser');
 
   // If no user, redirect to login
   if (!user) {

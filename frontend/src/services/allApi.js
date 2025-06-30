@@ -3,7 +3,7 @@ import { serverURL } from "./serverUrl";
 
 // Helper: Get headers with username
 const getUserHeader = () => {
-  const user = JSON.parse(sessionStorage.getItem('existingUser'));
+  const user = JSON.parse(localStorage.getItem('existingUser'));
   return {
     "Content-Type": "application/json",
     user: JSON.stringify(user)  // Required by middleware

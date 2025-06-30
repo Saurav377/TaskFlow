@@ -12,8 +12,8 @@ function Header({ refresh }) {
 
     // Actual logout logic
     const handleLogout = () => {
-        sessionStorage.removeItem("existingUser");
-        sessionStorage.removeItem("token");
+        localStorage.removeItem("existingUser");
+        localStorage.removeItem("token");
 
         toast.success("Logout Successful!", {
             position: "bottom-right",
