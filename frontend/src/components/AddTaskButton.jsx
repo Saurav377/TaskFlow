@@ -73,7 +73,7 @@ function AddTask({ refreshPage }) {
     return (
         <div>
 
-            <Button variant="secondary" className='m-3' size="lg" onClick={handleShow}>
+            <Button variant="success" className='m-3' size="lg" onClick={handleShow}>
                 +Add Task
             </Button>
             <Modal show={show} onHide={handleClose}>
@@ -105,7 +105,7 @@ function AddTask({ refreshPage }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleAddTask}>
+                    <Button variant="success" onClick={handleAddTask}>
                         Add Task
                     </Button>
                 </Modal.Footer>

@@ -42,7 +42,7 @@ function Current({ tasksData, refresh }) {
             <div className="row" style={{ marginTop: '100px' }}>
                 <div className="col-2"></div>
                 <div className="col-8 mt-5" style={{ fontSize: '20px' }}>
-                    <h3 className='text-center'>Current Tasks</h3>
+                    <h3 className='text-center text-light'>Current Tasks</h3>
                 </div>
                 <div className="col-2"></div>
             </div>
@@ -51,7 +51,7 @@ function Current({ tasksData, refresh }) {
             <div className="row m-5">
                 {tasksData.map((tasks, index) => (
                     <div className="col-md-3 mb-4" key={index}>
-                        <Card border="primary" style={{ width: '18rem' }}>
+                        <Card border="success" style={{ width: '18rem' }}>
                             <Card.Header>{tasks?.taskName}</Card.Header>
                             <Card.Body>
                                 <Card.Text>

@@ -77,7 +77,7 @@ function EditTask({ tasks, refresh }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={()=>{handleEditTask(); handleClose();}}>
+                    <Button variant="success" onClick={()=>{handleEditTask(); handleClose();}}>
                         Save changes
                     </Button>
                 </Modal.Footer>

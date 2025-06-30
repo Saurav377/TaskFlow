@@ -55,7 +55,7 @@ function Completed() {
         <div className="row" style={{ marginTop: '100px' }}>
           <div className="col-2"></div>
           <div className="col-8 mt-5" style={{ fontSize: '20px' }}>
-            <h3 className='text-center'>Completed Tasks</h3>
+            <h3 className='text-center text-light'>Completed Tasks</h3>
           </div>
           <div className="col-2"></div>
         </div>
@@ -63,7 +63,7 @@ function Completed() {
         <div className="row m-5">
           {completedData.reverse().map((completed, index) => (
             <div className="col-md-3 mb-4" key={index}>
-              <Card border="primary" style={{ width: '18rem' }}>
+              <Card border="success" style={{ width: '18rem' }}>
                 <Card.Header>{completed?.taskName}</Card.Header>
                 <Card.Body>
                   <Card.Text>

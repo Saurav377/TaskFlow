@@ -131,7 +131,7 @@ function Auth({ register, refresh }) {
     return (
         <div style={{ marginTop: '120px' }}>
             <div>
-                <nav className="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
+                <nav className="navbar navbar-expand-lg bg-dark fixed-top" data-bs-theme="dark">
                     <div className="container-fluid px-5">
                         <NavLink className="navbar-brand m-20 fw-bold" style={{ fontSize: '50px' }} to="/current">
                             TaskFlow
@@ -143,8 +143,8 @@ function Auth({ register, refresh }) {
                 <div className="col-1 col-md-4"></div>
                 <div className="col-10 col-md-4 mt-5">
                     {!register ?
-                        <h1 className='m-3'>Login</h1> :
-                        <h1 className='m-3'>Register</h1>}
+                        <h1 className='m-3 text-light'>Login</h1> :
+                        <h1 className='m-3 text-light'>Register</h1>}
                     <br />
                     <div>
                         <input type="text" className='form-control m-3' placeholder='Username'
@@ -171,10 +171,10 @@ function Auth({ register, refresh }) {
                         </div>
                         {!register ?
                             <>
-                                <button className='btn btn-light m-3' style={{ color: 'black' }} onClick={handleLogin} >Login</button>
+                                <button className='btn btn-success m-3' style={{ color: 'black' }} onClick={handleLogin} >Login</button>
                                 <p className='m-3'>New user? Click here to <Link to={'/register'}>Register</Link></p></> :
                             <>
-                                <button className='btn btn-light m-3' style={{ color: 'black' }} onClick={handleRegister}>Register</button>
+                                <button className='btn btn-success m-3' style={{ color: 'black' }} onClick={handleRegister}>Register</button>
                                 <p className='m-3'>Already have an account? Click here to <Link to={'/login'}>Login</Link></p></>}
                     </div>
                 </div>

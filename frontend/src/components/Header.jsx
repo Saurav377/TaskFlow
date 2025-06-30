@@ -34,7 +34,7 @@ function Header({ refresh }) {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
+            <nav className="navbar navbar-expand-lg bg-dark fixed-top" data-bs-theme="dark">
                 <div className="container-fluid px-5">
                     <NavLink className="navbar-brand m-20 fw-bold" style={{ fontSize: '50px' }} to="/current">
                         TaskFlow

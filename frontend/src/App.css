@@ -1,3 +1,6 @@
-.Toastify__toast-container {
-  z-index: 2000;/* or any value higher than Bootstrap modal (1050) */
+.Toastify__toast {
+  background-color: #0b4353 !important; /* Bootstrap Primary */
+  color: white !important;
+  border-radius: 12px !important;
+  font-family: 'Segoe UI', sans-serif;
 }
