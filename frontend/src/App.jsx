@@ -36,9 +36,14 @@ function App() {
         <Header refresh={getTasksData} />
       )}
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Auth register={false} refresh={getTasksData}/>} />
-        <Route path="/register" element={<Auth register={true} refresh={getTasksData}/>} />
+        <Route
+          path="/"
+          element={
+            sessionStorage.getItem('existingUser') ? <Navigate to="/current" /> : <Navigate to="/login" />
+          }
+        />
+        <Route path="/login" element={<Auth register={false} refresh={getTasksData} />} />
+        <Route path="/register" element={<Auth register={true} refresh={getTasksData} />} />
         <Route
           path="/current"
           element={

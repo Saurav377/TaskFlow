@@ -124,7 +124,7 @@ exports.login = async (req, res) => {
       return res.status(406).json("Incorrect password");
     }
 
-    const token = jwt.sign({ userId: existingUser._id }, "secretkey");
+    const token = jwt.sign({ userId: existingUser._id }, "secretkey", { expiresIn: '1d' });
     res.status(200).json({ existingUser, token });
 
   } catch (err) {
