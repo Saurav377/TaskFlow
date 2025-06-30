@@ -8,6 +8,8 @@ function Auth({ register, refresh }) {
 
     const navigate = useNavigate()
 
+    const [showPassword, setShowPassword] = useState(false)
+
     const [userDetails, setUserDetails] = useState({
         username: '',
         email: '',
@@ -15,7 +17,9 @@ function Auth({ register, refresh }) {
     })
 
     const handleRegister = async () => {
-        const { username, email, password } = userDetails
+        const username = userDetails.username.trim()
+        const email = userDetails.email.trim()
+        const password = userDetails.password.trim()
         if (!username || !email || !password) {
             toast.warn("Please fill data completely", {
                 position: "bottom-right",
@@ -28,7 +32,8 @@ function Auth({ register, refresh }) {
                 transition: Slide,
             });
         } else {
-            const result = await registerAPI(userDetails)
+            const trimmedUserDetails = { username, email, password }
+            const result = await registerAPI(trimmedUserDetails)
             console.log(result);
             if (result.status == 200) {
                 toast.success("Registered Successfully", {
@@ -65,7 +70,8 @@ function Auth({ register, refresh }) {
     }
 
     const handleLogin = async () => {
-        const { username, password } = userDetails
+        const username = userDetails.username.trim()
+        const password = userDetails.password.trim()
         if (!username || !password) {
             toast.warn("Please fill data completely", {
                 position: "bottom-right",
@@ -106,19 +112,18 @@ function Auth({ register, refresh }) {
                     navigate('/current')
                 }, 500)
             } else if (result.status == 406) {
-                alert(result.response.data)
-                setUserDetails({
-                    username: '',
-                    email: '',
-                    password: ''
-                })
+                toast.error(result.response.data, {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: 'dark',
+                    transition: Slide,
+                });
             } else {
                 alert('Something went wrong')
-                setUserDetails({
-                    username: '',
-                    email: '',
-                    password: ''
-                })
             }
         }
     }
@@ -149,9 +154,21 @@ function Auth({ register, refresh }) {
                             <input type="text" className='form-control m-3' placeholder='Email'
                                 onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
                                 value={userDetails.email} />}
-                        <input type="password" className='form-control m-3' placeholder='Password'
+                        <input type={showPassword ? 'text' : 'password'} className='form-control m-3' placeholder='Password'
                             onChange={(e) => setUserDetails({ ...userDetails, password: e.target.value })}
                             value={userDetails.password} />
+                        <div className="form-check m-3">
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="showPasswordCheck"
+                                checked={showPassword}
+                                onChange={() => setShowPassword(!showPassword)}
+                            />
+                            <label className="form-check-label" htmlFor="showPasswordCheck">
+                                Show Password
+                            </label>
+                        </div>
                         {!register ?
                             <>
                                 <button className='btn btn-light m-3' style={{ color: 'black' }} onClick={handleLogin} >Login</button>
