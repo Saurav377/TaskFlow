@@ -1,11 +1,39 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import AddTaskButton from './AddTaskButton'
+import Modal from 'react-bootstrap/Modal';
+import AddTaskButton from './AddTaskButton';
+import { Slide, toast } from 'react-toastify';
+import { FaPowerOff } from 'react-icons/fa';
 
-function Header({refresh}) {
+function Header({ refresh }) {
+    const navigate = useNavigate();
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+    // Actual logout logic
+    const handleLogout = () => {
+        sessionStorage.removeItem("existingUser");
+        sessionStorage.removeItem("token");
+
+        toast.success("Logout Successful!", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            theme: 'dark',
+            transition: Slide,
+        });
+
+        setShowLogoutModal(false); // Close modal
+        setTimeout(() => {
+            navigate("/");
+        }, 500);
+    };
+
     return (
-        <div>
+        <>
             <nav className="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
                 <div className="container-fluid px-5">
                     <NavLink className="navbar-brand m-20 fw-bold" style={{ fontSize: '50px' }} to="/current">
@@ -27,9 +55,7 @@ function Header({refresh}) {
                             <li className="nav-item">
                                 <NavLink
                                     to="/current"
-                                    className={({ isActive }) =>
-                                        `nav-link ${isActive ? 'active' : ''}`
-                                    }
+                                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                                     style={{ fontSize: '25px' }}
                                 >
                                     Current
@@ -38,22 +64,40 @@ function Header({refresh}) {
                             <li className="nav-item">
                                 <NavLink
                                     to="/completed"
-                                    className={({ isActive }) =>
-                                        `nav-link ${isActive ? 'active' : ''}`
-                                    }
+                                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                                     style={{ fontSize: '25px' }}
                                 >
                                     Completed
                                 </NavLink>
                             </li>
                         </ul>
-                        <AddTaskButton refreshPage={refresh}/>
+                        <AddTaskButton refreshPage={refresh} />
+                        <Button variant="danger" className="m-3" size="lg" onClick={() => setShowLogoutModal(true)}>
+                            <FaPowerOff />
+                        </Button>
                     </div>
                 </div>
             </nav>
-            
-        </div>
-    )
+
+            {/* Logout Confirmation Modal */}
+            <Modal show={showLogoutModal} onHide={() => setShowLogoutModal(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Logout</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Do you want to logout?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowLogoutModal(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleLogout}>
+                        Yes, Logout
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 }
 
-export default Header
+export default Header;

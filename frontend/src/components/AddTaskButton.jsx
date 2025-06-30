@@ -15,7 +15,14 @@ function AddTask({ refreshPage }) {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setTaskData({
+            taskName: "",
+            taskDescription: ""
+        });
+    };
+
     const handleShow = () => setShow(true);
 
     const handleAddTask = async (e) => {
@@ -65,7 +72,7 @@ function AddTask({ refreshPage }) {
     }
     return (
         <div>
-            
+
             <Button variant="secondary" className='m-3' size="lg" onClick={handleShow}>
                 +Add Task
             </Button>

@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Header from './components/Header'
-import Completed from './pages/Completed'
-import Current from './pages/Current'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import { GetTaskAPI } from './services/allApi'
-import { Slide, toast, ToastContainer } from 'react-toastify'
+import { useEffect, useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import Header from './components/Header';
+import Completed from './pages/Completed';
+import Current from './pages/Current';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { GetTaskAPI } from './services/allApi';
+import { Slide, toast, ToastContainer } from 'react-toastify';
+import Auth from './pages/Auth';
+import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const [tasksData, setTasksData] = useState([])
+  const [tasksData, setTasksData] = useState([]);
+  const location = useLocation();
 
   const getTasksData = async () => {
-    const result = await GetTaskAPI()
+    const result = await GetTaskAPI();
     console.log(result);
     if (Array.isArray(result?.data)) {
       setTasksData(result.data);
@@ -23,18 +24,37 @@ function App() {
       console.error("Invalid data format", result);
       setTasksData([]); // Fallback to empty array
     }
-  }
+  };
+
   useEffect(() => {
-    getTasksData()
-  }, [])
+    getTasksData();
+  }, []);
 
   return (
     <>
-      <Header refresh={getTasksData} />
+      {!['/login', '/register'].includes(location.pathname) && (
+        <Header refresh={getTasksData} />
+      )}
       <Routes>
-        <Route path="/" element={<Navigate to="/current" />} />
-        <Route path='/current' element={<Current tasksData={tasksData} refresh={getTasksData} />} />
-        <Route path='/completed' element={<Completed />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Auth register={false} refresh={getTasksData}/>} />
+        <Route path="/register" element={<Auth register={true} refresh={getTasksData}/>} />
+        <Route
+          path="/current"
+          element={
+            <PrivateRoute>
+              <Current tasksData={tasksData} refresh={getTasksData} />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/completed"
+          element={
+            <PrivateRoute>
+              <Completed />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <ToastContainer
         position="bottom-right"
@@ -52,7 +72,7 @@ function App() {
         limit={3}
       />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
