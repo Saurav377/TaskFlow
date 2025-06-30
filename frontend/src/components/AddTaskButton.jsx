@@ -76,11 +76,11 @@ function AddTask({ refreshPage }) {
             <Button variant="success" className='m-3' size="lg" onClick={handleShow}>
                 +Add Task
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} className='text-light'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new Task</Modal.Title>
+                    <Modal.Title className='text-light'>Add new Task</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='text-light'>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Task Name</Form.Label>

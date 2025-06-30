@@ -52,9 +52,9 @@ function Current({ tasksData, refresh }) {
                 {tasksData.map((tasks, index) => (
                     <div className="col-md-3 mb-4" key={index}>
                         <Card border="success" style={{ width: '18rem' }}>
-                            <Card.Header>{tasks?.taskName}</Card.Header>
+                            <Card.Header className='text-light'>{tasks?.taskName}</Card.Header>
                             <Card.Body>
-                                <Card.Text>
+                                <Card.Text className='text-light'>
                                     {tasks?.taskDescription}
                                 </Card.Text>
                                 <div className='d-flex justify-content-around'>

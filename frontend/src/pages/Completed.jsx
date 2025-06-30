@@ -64,9 +64,9 @@ function Completed() {
           {completedData.reverse().map((completed, index) => (
             <div className="col-md-3 mb-4" key={index}>
               <Card border="success" style={{ width: '18rem' }}>
-                <Card.Header>{completed?.taskName}</Card.Header>
+                <Card.Header className='text-light'>{completed?.taskName}</Card.Header>
                 <Card.Body>
-                  <Card.Text>
+                  <Card.Text className='text-light'>
                     {completed?.taskDescription}
                   </Card.Text>
                   <div className='d-flex justify-content-around'>

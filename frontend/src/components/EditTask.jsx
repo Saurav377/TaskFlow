@@ -46,11 +46,11 @@ function EditTask({ tasks, refresh }) {
     return (
         <div>
             <Button variant="outline-warning" onClick={handleShow}><FaEdit/></Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} className='text-light'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Task</Modal.Title>
+                    <Modal.Title className='text-light'>Edit Task</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='text-light'>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Task Name</Form.Label>

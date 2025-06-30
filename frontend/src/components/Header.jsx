@@ -81,10 +81,10 @@ function Header({ refresh }) {
 
             {/* Logout Confirmation Modal */}
             <Modal show={showLogoutModal} onHide={() => setShowLogoutModal(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Confirm Logout</Modal.Title>
+                <Modal.Header closeButton >
+                    <Modal.Title  className='text-light'>Confirm Logout</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body  className='text-light'>
                     Do you want to logout?
                 </Modal.Body>
                 <Modal.Footer>
